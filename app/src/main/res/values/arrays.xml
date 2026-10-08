@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 模块推荐作用域：仅系统框架(system_server)，这样无需勾选任何其它 App -->
+    <string-array name="module_scope" translatable="false">
+        <!-- system_server 的包名是 android，LSPosed 在部分版本中把它记作 system，两个都写上 -->
+        <item>android</item>
+        <item>system</item>
+    </string-array>
+</resources>

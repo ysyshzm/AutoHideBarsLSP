@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.hidebar.lsp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.hidebar.lsp"
+        minSdk 24
+        targetSdk 34
+        versionCode 37
+        versionName "2.4.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    // 需要 BuildConfig.VERSION_NAME / VERSION_CODE：模块靠它回传"内存里跑的是哪次编译的 dex"，
+    // App 据此判断要不要提示重启。AGP 8 起默认不生成，必须显式打开。
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Xposed / LSPosed API（仅编译期，运行时由 LSPosed 框架提供）
+    compileOnly 'de.robv.android.xposed:api:82'
+}

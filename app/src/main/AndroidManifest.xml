@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- signature 级权限：只有同签名的本 App 能拿到，用来保护「改配置」的广播 -->
+    <permission
+        android:name="com.hidebar.lsp.permission.SET_CONFIG"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.hidebar.lsp.permission.SET_CONFIG" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ColorPickerActivity"
+            android:exported="false" />
+
+        <!-- ===== Xposed / LSPosed 模块声明 ===== -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="@string/xposed_description" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="82" />
+        <!-- 推荐作用域：仅“系统框架(android)”，无需勾选其它 App -->
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/module_scope" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="18dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="←"
+                android:textSize="20sp"
+                android:textColor="#FF1565C0"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/tvPickerTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/picker_title"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#FF222222" />
+
+        </LinearLayout>
+
+        <!-- ══ 预览：模拟一条浅色 App 之上的状态栏 / 导航栏 ══
+             v2.1.3：同一个调色板复用于两条栏，预览也跟着换——
+             状态栏 = 顶部一条（时间 / 信号），导航栏 = 底部一条（三键），
+             之前点进「导航栏背景颜色」看到的还是顶部那条状态栏样式。 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg_blue"
+            android:padding="12dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPreviewLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/picker_preview_status"
+                android:textSize="12sp"
+                android:textColor="#FF0D47A1"
+                android:layout_marginBottom="6dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:background="#FFF7F7F7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="浅色 App 内容"
+                    android:textSize="12sp"
+                    android:textColor="#FFAAAAAA" />
+
+                <!-- 状态栏样式：贴在顶部 -->
+                <LinearLayout
+                    android:id="@+id/previewBarStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_gravity="top"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19:37"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信号  5G   42"
+                        android:textSize="11sp"
+                        android:textColor="#FFFFFFFF" />
+
+                </LinearLayout>
+
+                <!-- 导航栏样式：贴在底部，中间是三键（返回 / 主页 / 最近任务） -->
+                <LinearLayout
+                    android:id="@+id/previewBarNav"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:paddingLeft="28dp"
+                    android:paddingRight="28dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\u25C1"
+                        android:textSize="17sp"
+                        android:textColor="#FFFFFFFF" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\u25CB"
+                        android:textSize="15sp"
+                        android:textColor="#FFFFFFFF" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\u25A1"
+                        android:textSize="15sp"
+                        android:textColor="#FFFFFFFF" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvPreviewColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="#00000000"
+                android:textSize="12sp"
+                android:textColor="#FF1565C0"
+                android:layout_marginTop="6dp" />
+
+        </LinearLayout>
+
+        <!-- ══ 色轮 ══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/picker_wheel"
+                android:textSize="12sp"
+                android:textColor="#FF666666" />
+
+            <com.hidebar.lsp.ColorWheelView
+                android:id="@+id/wheel"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <!-- ══ 深浅 ══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/picker_depth"
+                    android:textSize="13sp"
+                    android:textColor="#FF666666" />
+
+                <TextView
+                    android:id="@+id/tvDepth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FF0D47A1" />
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbDepth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="100"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- ══ 常显开关（v2.0.3）══
+             只对状态栏有意义，调导航栏时整张卡都不显示 -->
+        <LinearLayout
+            android:id="@+id/cardAlways"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:id="@+id/rowAlways"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/always_title"
+                    android:textSize="14sp"
+                    android:textColor="#FF222222" />
+
+                <Switch
+                    android:id="@+id/swAlways"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/always_note"
+                android:textSize="12sp"
+                android:textColor="#FF1565C0"
+                android:lineSpacingMultiplier="1.35"
+                android:layout_marginTop="6dp" />
+
+        </LinearLayout>
+
+        <!-- ══ 预设 ══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/picker_preset"
+                android:textSize="12sp"
+                android:textColor="#FF666666"
+                android:layout_marginBottom="8dp" />
+
+            <!-- v2.1.3：预设只留三个真正用得上的——关闭 / 纯黑 / 纯白。
+                 之前的深灰、暖色、冷色在实机上几乎看不出差别，纯黑还因为
+                 色轮只有 H/S 两个通道（V 恒为 1）实际算成白色，等于没生效。 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPreNone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:text="@string/picker_none"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnPreBlack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:text="@string/picker_black"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="6dp" />
+
+                <Button
+                    android:id="@+id/btnPreWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:text="@string/picker_white"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="6dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/picker_note"
+                android:textSize="12sp"
+                android:textColor="#FF1565C0"
+                android:lineSpacingMultiplier="1.35"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/picker_done"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+</ScrollView>

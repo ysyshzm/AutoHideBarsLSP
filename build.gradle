@@ -1,0 +1,12 @@
+// 顶层构建脚本：仅提供 AGP classpath。
+// 注意：仓库统一在 settings.gradle 的 dependencyResolutionManagement 中声明，
+// 且设置了 FAIL_ON_PROJECT_REPOS，这里不能写 allprojects{ repositories }，否则构建失败。
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.2'
+    }
+}

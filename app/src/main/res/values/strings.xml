@@ -1,0 +1,49 @@
+﻿<resources>
+    <string name="app_name">AutoHideBars LSP</string>
+    <string name="xposed_description">在系统框架层（system_server）全局隐藏状态栏与导航栏，作用于所有 App。作用域仅需勾选“系统框架”。</string>
+
+    <string name="info_title">AutoHideBars LSPosed 模块</string>
+
+    <string name="policy_label">当前配置：</string>
+
+    <string name="alpha_note">隐藏透明度（千分之一）：默认 10‰ 几乎看不见。数值越大，系统越倾向把顶边手势判给状态栏，但状态栏也越容易显形。</string>
+    <string name="absorb_note">开启后隐藏态会「吸收」顶边手势并暂时压制面板展开，避免刷短视频时误刷新。约需先配合 ≥60‰ 的透明度。</string>
+    <string name="time_note">范围 0.5 ~ 10 秒，默认 3.5 秒。这段时间内再下滑一次即可展开通知面板；调短则更快收起、能展开面板的机会窗口也更小。约 1 秒生效，不用重启。</string>
+
+    <string name="full_note">开启后 App 内容从屏幕最顶端开始画，顶部不再预留一条空白。状态栏下拉揭示时改为「浮层」盖在内容上，内容不重排、不抖动。个别 App 可能出现顶栏被盖住，关掉本项即可恢复。</string>
+    <string name="full_mode_title">应用占满全屏</string>
+    <string name="full_mode_off">关闭</string>
+    <string name="full_mode_overlay">浮层</string>
+    <string name="full_mode_sq">挤压</string>
+    <string name="full_off_note">关闭：跟系统默认一样，顶部给状态栏留一条空白，谁都不动。App 自己画了顶栏、开了占满反而错位时选它。</string>
+    <string name="full_overlay_note">浮层式：App 内容从屏幕最顶端开始画，顶部不再留白。状态栏下拉揭示时以「浮层」盖在内容上，内容不重排、不抖动。代价是揭示的那几秒，最上面那一条内容会被状态栏压住。</string>
+    <string name="full_sq_note">挤压式：平时同样占满全屏，但状态栏揭示时把那 104px 还回去 —— App 内容被顶下来、重新给状态栏让位，状态栏是「挤」出来的实体条而不是浮层，顶部内容不会被盖住。代价是揭示/收起时内容会上下动一下。浮层式会盖住顶栏的 App，可以试试这个。</string>
+    <string name="color_note">点进去是自定义调色板（色轮 + 深浅）。颜色只在状态栏「揭示」的那几秒出现，用来让白色时间/图标压在浅色 App 上也能看清；默认关闭。</string>
+    <string name="fullnav_note">把底部导航栏占的那条也还给 App，内容一路画到屏幕最底。导航栏揭示时同样以「浮层」方式盖在内容上。用三键导航且不想被盖住底部时关掉它。</string>
+    <string name="zeroedge_title">顺带清掉其它顶/底内边距</string>
+    <string name="zeroedge_note">有些 App（手机 QQ 这类腾讯系最常见）不看「状态栏」有多少，而是看「可点击元素 / 系统手势区」来算顶部该给多少空白 —— 只把状态栏那条清成 0，它照样留一条白边（实测 104px，正好一个状态栏高）。打开本项后，凡是贴着屏幕顶边或底边的全宽条带，不论系统里管它叫什么名字，都会一起清掉，这些 App 也就真的顶到边了。若某个 App 因此内容顶得太靠上、顶栏被切，关掉本项即可恢复。</string>
+    <string name="navsoft_note">推荐开启。之前导航栏是「硬隐藏」——整个 Surface 被真的移除，底边上滑没人接，所以怎么滑都出不来。开启后照状态栏的做法：窗口保留、只压到几乎透明，从底边往上滑一下就把导航栏唤出来，停留时间和状态栏一致；下拉状态栏时它也会跟着一起出现。关掉则退回旧行为。</string>
+
+    <string name="navsq_note">开启后是「混合模式」：隐藏时内容占满全屏，导航栏以浮层盖在上面；一旦唤出导航栏，就把底部那 142px 还给应用，应用内容被顶上去，三键是「挤」出来的而不是「盖」上去的，应用底部的按钮照样点得到。关闭则全程浮层（内容不重排，但唤出时底部会被压住）。</string>
+    <string name="touchblock_note">解决「看不见却按得到」：软隐藏只把栏压到几乎透明，窗口和触摸区域都还在，盲按三键位置照样会返回桌面或切后台。开启后隐藏态清空它们的触摸区域，点击穿透给应用；唤出时自动恢复可点。「应用占满全屏」打开时这一项本来就会对顶部自动生效（内容顶到 y=0 却点不到是自相矛盾的），关掉这里只是把导航栏那部分也停掉。</string>
+
+    <string name="picker_title">状态栏背景颜色</string>
+    <string name="picker_title_nav">导航栏背景颜色</string>
+    <string name="navcolor_note">导航栏呼出时是浮在应用内容上的，背景全透明，遇到纯白或浅色界面三键就看不清了。设一个背景色给它垫底，任何界面都能看清。颜色只在导航栏呼出时出现。</string>
+    <string name="picker_preview_status">预览 · 状态栏（顶部那条）</string>
+    <string name="picker_preview_nav">预览 · 导航栏（底部三键那条）</string>
+    <string name="picker_wheel">色相 / 饱和度 —— 拖动圆点取色</string>
+    <string name="picker_depth">深浅（不透明度）</string>
+    <string name="picker_preset">预设</string>
+    <string name="picker_none">关闭</string>
+    <string name="picker_black">纯黑</string>
+    <string name="picker_white">纯白</string>
+    <string name="picker_done">完成</string>
+    <string name="picker_note" formatted="false">色轮只决定色相与饱和度，深浅决定它有多实；拖到 0% 等同于「关闭」。预设里「纯黑 / 纯白」会直接把明度定死（黑 = 明度 0%），不用再去拖色轮。改完立刻写入，不用重启。</string>
+    <string name="always_title">始终显示（隐藏时也不撤）</string>
+    <string name="always_note">默认只在下拉揭示的那几秒出现。打开后颜色条常驻在顶部：对酷安这类自己留出空白条的 App，顶部就不再是一片空白。代价是已经顶到 y=0 的 App，最上面那条会被盖住，所以按需开启。</string>
+
+    <string name="about_title">软件关于</string>
+    <string name="about_note">本模块免费自用，不收集任何数据，也不联网。</string>
+    <string name="about_body">在系统框架层（system_server）全局隐藏状态栏与导航栏的 LSPosed 模块，对所有 App 生效，无需逐 App 适配。\n\n【适用环境】\n· Android 14 ~ 16 / 澎湃 HyperOS\n· 已在努比亚 NX721J、Android 16、HyperOS OS3.0 上完整验证\n· 需要 Root + LSPosed；作用域只勾选「系统框架」，不必勾选任何 App\n\n【安装步骤】\n1. 在 LSPosed 管理器中启用本模块\n2. 作用域只勾选「系统框架」\n3. 重启手机（或重启系统框架）\n\n【下拉手势】两级式\n· 第 1 次从屏幕顶边下滑 —— 只唤出状态栏（时间、图标），约 3.5 秒后自动收起\n· 第 2 次下滑（上面这段时间内）—— 展开通知面板，保留 MIUI 左右分栏\n· 这样只是想看时间时不会误开面板，也不会破坏沉浸全屏\n\n【状态栏显示时间】\n点「隐藏状态栏」右侧的 › 展开二级菜单：\n· 状态栏显示时间 —— 第 1 次下滑后停留多久（0.5 ~ 10 秒，默认 3.5 秒）\n· 拖滑块即时生效，也可点 2 秒 / 3.5 秒 / 5 秒 / 8 秒 快捷按钮\n· 调短 = 更快收起，但「第二次下滑展开面板」的机会窗口也更小\n· 「进阶」里是隐藏透明度与顶边吸收，默认不用动\n\n【开关说明】\n· 隐藏状态栏 —— 只藏顶部，导航栏不受影响\n· 隐藏导航栏 —— 只藏底部；注意启用后「三键虚拟导航」也会一起隐藏，想用三键就把它关掉\n· 硬隐藏 —— 连边缘滑出的瞬态栏也一并禁止\n\n【高级开关】adb shell settings put global\n· autohide_reveal_ms —— 状态栏显示时间，毫秒，默认 3500\n· autohide_ghost_alpha —— 隐藏态图层透明度，千分之一单位，默认 10（=0.01）\n· autohide_top_absorb —— 顶边手势「吸收+压制」，阻止手势穿透到 App（如刷短视频被误刷新），默认 0（关）\n· autohide_debug_reveal —— 强制视为已揭示，仅供调试，默认 0\n\n【即时生效】\n改完开关立刻生效，不需要重启手机。\n\n【排错】\n若界面提示没收到模块回执，请确认：\n· LSPosed 里已启用本模块，且作用域勾选了「系统框架」\n· 修改后至少重启过一次手机\n· 日志查看：adb logcat | grep AutoHideLSP（实际标签是 LSPosedFramework）</string>
+</resources>
